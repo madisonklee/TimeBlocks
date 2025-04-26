@@ -1,6 +1,7 @@
 import time
 import pygame
 
+'''
 def getUserInput():
     num_intervals = int(input("How many unique intervals would you like? "))
     intervals = []
@@ -13,32 +14,29 @@ def getUserInput():
     reps = int(input("How many reps would you like to repeat the sequence? "))
     
     return intervals, reps
+'''
 
 def playSound():
     pygame.mixer.init()
-    pygame.mixer.music.load("chime.mp3")  # Make sure this file exists
+    pygame.mixer.music.load("chime.mp3")  # make sure this file exists
     pygame.mixer.music.play()
 
-    # Wait until the sound finishes playing
     while pygame.mixer.music.get_busy():
         continue
 
-def runTimer():
-    intervals, reps = getUserInput()
+def runTimer(intervals, reps):
+    # intervals, reps = getUserInput()
     
-    print(f"\nStarting your interval timer for {reps} reps...\n")
-    
+    # print(f"\nStarting your interval timer for {reps} reps...\n")
+    log = []
     for rep in range(1, reps + 1):
-        print(f"Rep {rep}/{reps}")
+        log.append(f"Rep {rep}/{reps}")
         for i, (name, duration) in enumerate(intervals):
-            print(f"⏱️  {name} — {duration} seconds")
+            log.append(f"⏱️  {name} — {duration} seconds")
             time.sleep(duration)
             playSound()
-            print(f"✅  Finished: {name}")
+            log.append(f"✅  Finished: {name}")
     
-    print("\nAll reps complete! Great job!")
-    # playSound()
+    log.append("\nAll reps complete! Great job!")
+    return log
     
-# Run the timer
-if __name__ == "__main__":
-    runTimer()
